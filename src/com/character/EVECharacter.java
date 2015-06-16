@@ -1,6 +1,7 @@
 package com.character;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 
@@ -34,19 +35,42 @@ public class EVECharacter {
     private Date jumpFatigue;
     private Date jumpLastUpdate;
     private double balance;
-    private List<Skills> skillList;
-    private List<Titles> titles;
+    private ArrayList<Skills> skillList;
+    private ArrayList<Titles> titles;
     private Attributes attributes;
-    private List<Implants> implants;
-
+    private ArrayList<Implants> implants;
+    private ArrayList<JumpClone> jumpClones;
     
     public EVECharacter (){
         attributes = new Attributes();
+        implants = new ArrayList();
+        jumpClones = new ArrayList();
     }
+    
+    public void addJumpClones(JumpClone jumpClone){
+        jumpClones.add(jumpClone);
+    }
+    
+    public void addJumpCloneImplants(JumpClone jumpClone, Implants implant){
+        jumpClone.addImplants(implant);
+    }
+    
+    public JumpClone getJumpClone(int jumpCloneID){
+        JumpClone tempClone = null;
+        for (int x = 0; x <= jumpClones.size(); x++){
+            if (jumpClones.get(x).getJumpCloneID() == jumpCloneID) {
+                tempClone = jumpClones.get(x);
+                break;
+                }
+        }
+            return tempClone;
+    }
+    
     
     public void addImplants(Implants implant){
         implants.add(implant);
     }
+    
     
     public Attributes getAttributes() {
         return attributes;
@@ -272,19 +296,19 @@ public class EVECharacter {
         this.balance = balance;
     }
 
-    public List<Skills> getSkillList() {
+    public ArrayList<Skills> getSkillList() {
         return skillList;
     }
 
-    public void setSkillList(List<Skills> skillList) {
+    public void setSkillList(ArrayList<Skills> skillList) {
         this.skillList = skillList;
     }
 
-    public List<Titles> getTitles() {
+    public ArrayList<Titles> getTitles() {
         return titles;
     }
 
-    public void setTitles(List<Titles> titles) {
+    public void setTitles(ArrayList<Titles> titles) {
         this.titles = titles;
     }
 
@@ -332,6 +356,8 @@ public class EVECharacter {
     public String toString() {
         return "EVECharacter{" + "characterID=" + characterID + ", name=" + name + ", homeStationID=" + homeStationID + ", dob=" + dob + ", race=" + race + ", bloodLine=" + bloodLine + ", ancestry=" + ancestry + ", gender=" + gender + ", corporationName=" + corporationName + ", corporationID=" + corporationID + ", allianceName=" + allianceName + ", allianceID=" + allianceID + ", factionName=" + factionName + ", factionID=" + factionID + ", cloneTypeID=" + cloneTypeID + ", cloneName=" + cloneName + ", cloneSkillPoints=" + cloneSkillPoints + ", freeSkillPoints=" + freeSkillPoints + ", freeRespecs=" + freeRespecs + ", cloneJumpDate=" + cloneJumpDate + ", lastRespecDate=" + lastRespecDate + ", lastTimedRespec=" + lastTimedRespec + ", remoteStationDate=" + remoteStationDate + ", jumpActivation=" + jumpActivation + ", jumpFatigue=" + jumpFatigue + ", jumpLastUpdate=" + jumpLastUpdate + ", balance=" + balance + ", skillList=" + skillList + ", titles=" + titles + ", attributes=" + attributes + ", implants=" + implants + '}';
     }
+
+
 
 
 

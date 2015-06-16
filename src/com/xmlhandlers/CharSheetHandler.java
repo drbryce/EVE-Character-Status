@@ -3,15 +3,12 @@ package com.xmlhandlers;
 
 import com.character.*;
 import java.io.IOException;
-import java.net.URL;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.*;
-import org.xml.sax.*;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -222,10 +219,12 @@ public class CharSheetHandler extends DefaultHandler {
                     
                 case "balance":
                     tempChar.setBalance(Double.parseDouble(content));
+                    System.out.println("balance " + content);
                     break;                     
 
                 case "intelligence":
                     tempChar.setIntelligence(Integer.parseInt(content));
+                    System.out.println("intel " + content);
                     break;                      
 
                 case "memory":
@@ -256,12 +255,27 @@ public class CharSheetHandler extends DefaultHandler {
     
     public void rowsetStartElement(String uri, String localName, String qName,
 			Attributes attributes){
+        Implants implant = null;
         switch (rowsetName) {
             case "implants":  
-                        Implants implant = new Implants(Integer.parseInt(attributes.getValue("typeID")),attributes.getValue("typeName"));
+                        implant = new Implants(Integer.parseInt(attributes.getValue("typeID")),attributes.getValue("typeName"));
                         tempChar.addImplants(implant);
                      break;
-            
+
+            case "jumpClones": 
+                        JumpClone jumpClone = new JumpClone(Integer.parseInt(attributes.getValue("jumpCloneID")),
+                                Integer.parseInt(attributes.getValue("typeID")),
+                                        Integer.parseInt(attributes.getValue("locationID")),
+                                                attributes.getValue("cloneName"));
+                        tempChar.addJumpClones(jumpClone);
+                     break;                
+              
+            case "jumpCloneImplants":
+                        int jumpCloneID = Integer.parseInt(attributes.getValue("jumpCloneID"));
+                        implant = new Implants(Integer.parseInt(attributes.getValue("typeID")),attributes.getValue("typeName"));
+                        tempChar.getJumpClone(jumpCloneID).addImplants(implant);
+                    break;
+                
             default: 
                      break;
         }

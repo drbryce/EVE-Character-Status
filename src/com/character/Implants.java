@@ -30,7 +30,7 @@ public class Implants {
 
     @Override
     public String toString() {
-        return "Implants{" + "typeID=" + typeID + ", typeName=" + typeName + '}';
+        return "Implants{" + "typeID=" + typeID + ", typeName=" + typeName + "}\n";
     }
 
 }

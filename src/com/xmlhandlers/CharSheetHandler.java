@@ -111,6 +111,7 @@ public class CharSheetHandler extends DefaultHandler {
                     
                 case "name":
                     tempChar.setName(content);
+                    System.out.println("char name " + content);
                     break;
                     
                 case "homeStationID":
@@ -219,7 +220,6 @@ public class CharSheetHandler extends DefaultHandler {
                     
                 case "balance":
                     tempChar.setBalance(Double.parseDouble(content));
-                    System.out.println("balance " + content);
                     break;                     
 
                 case "intelligence":
@@ -245,6 +245,7 @@ public class CharSheetHandler extends DefaultHandler {
     
                     
                 default:
+                    System.out.println(content + ": not covered");
                     break;
             }}
             

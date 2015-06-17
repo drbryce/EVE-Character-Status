@@ -71,7 +71,8 @@ public class CharSheetHandler extends DefaultHandler {
         
         if (currentElement == "") return;
         
-        if(!rowsetElem) normalEndElement(uri,localName,qName);
+ 
+        normalEndElement(uri,localName,qName);
         
         currentElement = "";
         
@@ -257,6 +258,7 @@ public class CharSheetHandler extends DefaultHandler {
     public void rowsetStartElement(String uri, String localName, String qName,
 			Attributes attributes){
         Implants implant = null;
+        Skills skill = null;
         switch (rowsetName) {
             case "implants":  
                         implant = new Implants(Integer.parseInt(attributes.getValue("typeID")),attributes.getValue("typeName"));
@@ -277,6 +279,9 @@ public class CharSheetHandler extends DefaultHandler {
                         tempChar.getJumpClone(jumpCloneID).addImplants(implant);
                     break;
                 
+            case "skills":
+                        skill = new Skills(Integer.parseInt(attributes.getValue("typeID")),Integer.parseInt(attributes.getValue("skillpoints")),Integer.parseInt(attributes.getValue("level")),Boolean.parseBoolean(attributes.getValue("published")));
+                        tempChar.addSkills(skill);
             default: 
                      break;
         }

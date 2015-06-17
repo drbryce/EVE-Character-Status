@@ -45,6 +45,7 @@ public class EVECharacter {
         attributes = new Attributes();
         implants = new ArrayList();
         jumpClones = new ArrayList();
+        skillList = new ArrayList();
     }
     
     public void addJumpClones(JumpClone jumpClone){
@@ -64,6 +65,11 @@ public class EVECharacter {
                 }
         }
             return tempClone;
+    }
+    
+    
+    public void addSkills (Skills skills){
+        skillList.add(skills);
     }
     
     
@@ -354,8 +360,10 @@ public class EVECharacter {
 
     @Override
     public String toString() {
-        return "EVECharacter{" + "characterID=" + characterID + ", name=" + name + ", homeStationID=" + homeStationID + ", dob=" + dob + ", race=" + race + ", bloodLine=" + bloodLine + ", ancestry=" + ancestry + ", gender=" + gender + ", corporationName=" + corporationName + ", corporationID=" + corporationID + ", allianceName=" + allianceName + ", allianceID=" + allianceID + ", factionName=" + factionName + ", factionID=" + factionID + ", cloneTypeID=" + cloneTypeID + ", cloneName=" + cloneName + ", cloneSkillPoints=" + cloneSkillPoints + ", freeSkillPoints=" + freeSkillPoints + ", freeRespecs=" + freeRespecs + ", cloneJumpDate=" + cloneJumpDate + ", lastRespecDate=" + lastRespecDate + ", lastTimedRespec=" + lastTimedRespec + ", remoteStationDate=" + remoteStationDate + ", jumpActivation=" + jumpActivation + ", jumpFatigue=" + jumpFatigue + ", jumpLastUpdate=" + jumpLastUpdate + ", balance=" + balance + ", skillList=" + skillList + ", titles=" + titles + ", attributes=" + attributes + ", implants=" + implants + '}';
+        return "EVECharacter{" + "characterID=" + characterID + ", name=" + name + ", homeStationID=" + homeStationID + ", dob=" + dob + ", race=" + race + ", bloodLine=" + bloodLine + ", ancestry=" + ancestry + ", gender=" + gender + ", corporationName=" + corporationName + ", corporationID=" + corporationID + ", allianceName=" + allianceName + ", allianceID=" + allianceID + ", factionName=" + factionName + ", factionID=" + factionID + ", cloneTypeID=" + cloneTypeID + ", cloneName=" + cloneName + ", cloneSkillPoints=" + cloneSkillPoints + ", freeSkillPoints=" + freeSkillPoints + ", freeRespecs=" + freeRespecs + ", cloneJumpDate=" + cloneJumpDate + ", lastRespecDate=" + lastRespecDate + ", lastTimedRespec=" + lastTimedRespec + ", remoteStationDate=" + remoteStationDate + ", jumpActivation=" + jumpActivation + ", jumpFatigue=" + jumpFatigue + ", jumpLastUpdate=" + jumpLastUpdate + ", balance=" + balance + ", skillList=" + skillList + ", titles=" + titles + ", attributes=" + attributes + ", implants=" + implants + ", jumpClones=" + jumpClones + '}';
     }
+
+    
 
 
 

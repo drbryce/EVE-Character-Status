@@ -65,19 +65,26 @@ public class AccountStatusHandler extends DefaultHandler{
                     rowsetElem = true;
                     rowsetName = attributes.getValue("name");
                 }
-                if (currentElement == "row") rowsetStartElement(uri,localName,qName,attributes);
+                if (currentElement == "row") try {
+                    rowsetStartElement(uri,localName,qName,attributes);
+                } catch (ParseException ex) {
+                    Logger.getLogger(AccountStatusHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
         public void rowsetStartElement(String uri, String localName, String qName,
-			Attributes attributes){
-            switch (rowsetName) {
-                case "implants":  
-                        //todo
-                     break;
+			Attributes attributes) throws ParseException{
             
-                default: 
-                     break;
-        }
+            SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            DATE_FORMAT.setTimeZone(TimeZone.getTimeZone("UTC"));
+            String content = currentText.toString();
+            System.out.println(content);
+            Date date;
+            
+            if (currentElement == "multiCharacterTraining") {  
+                    date = DATE_FORMAT.parse(content);
+                    accountStatus.addMultiCharacterTraining(date);
+            }
     }        
 
         @Override
@@ -88,7 +95,8 @@ public class AccountStatusHandler extends DefaultHandler{
         
         if (currentElement == "") return;
         
-        if(!rowsetElem) normalEndElement(uri,localName,qName);
+        //if(!rowsetElem) 
+        normalEndElement(uri,localName,qName);
         
         currentElement = "";
         
@@ -100,28 +108,37 @@ public class AccountStatusHandler extends DefaultHandler{
 
         public void normalEndElement(String uri, String localName, String qName){
 
-            String content = currentText.toString();
-            System.out.println(content);
-            switch (currentElement){
-                case "paidUntil":
-                    accountStatus.setPaidUntil(content);
-                    break;
+                try {
+                    String content = currentText.toString();
+                    SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    DATE_FORMAT.setTimeZone(TimeZone.getTimeZone("UTC"));
+                    System.out.println(content);
+                    Date date;
                     
-                case "createDate":
-                    accountStatus.setCreateDate(content);
-                    break;
-                    
-                case "logonCount":
-                    accountStatus.setLogonCount(Integer.parseInt(content));
-                    break;
-                    
-                case "logonMinutes":
-                    accountStatus.setLogonMinutes(Integer.parseInt(content));
-                    break;
-                    
-                default:
-                    break;
-            }
+                    switch (currentElement){
+                        case "paidUntil":
+                            date = DATE_FORMAT.parse(content);
+                            accountStatus.setPaidUntil(date);
+                            break;
+                            
+                        case "createDate":
+                            date = DATE_FORMAT.parse(content);
+                            accountStatus.setCreateDate(date);
+                            break;
+                            
+                        case "logonCount":
+                            accountStatus.setLogonCount(Integer.parseInt(content));
+                            break;
+                            
+                        case "logonMinutes":
+                            accountStatus.setLogonMinutes(Integer.parseInt(content));
+                            break;
+                            
+                        default:
+                            break;
+                    }   } catch (ParseException ex) {
+                    Logger.getLogger(AccountStatusHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
         }
 
 	@Override

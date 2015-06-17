@@ -5,6 +5,7 @@
  */
 package com.character;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -12,28 +13,38 @@ import java.util.Date;
  * @author designstation1
  */
 public class AccountStatus {
-    //Date paidUntil;
-    //Date createDate;
-    String paidUntil;
-    String createDate;
+    Date paidUntil;
+    Date createDate;
     int logonCount;
     int logonMinutes;
+    ArrayList<Date> multiCharacterTraining;
+    
+    
+    public AccountStatus(){
+        multiCharacterTraining = new ArrayList();
+    }
 
-    public String getPaidUntil() {
+
+    public void addMultiCharacterTraining(Date date){
+        multiCharacterTraining.add(date);
+    }    
+    
+    public Date getPaidUntil() {
         return paidUntil;
     }
 
-    public void setPaidUntil(String paidUntil) {
+    public void setPaidUntil(Date paidUntil) {
         this.paidUntil = paidUntil;
     }
 
-    public String getCreateDate() {
+    public Date getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(String createDate) {
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
+
 
     public int getLogonCount() {
         return logonCount;
@@ -51,10 +62,12 @@ public class AccountStatus {
         this.logonMinutes = logonMinutes;
     }
 
-
     @Override
     public String toString() {
-        return "AccountStatus{" + "paidUntil=" + paidUntil + ", createDate=" + createDate + ", logonCount=" + logonCount + ", logonMinutes=" + logonMinutes + '}';
+        return "AccountStatus{" + "paidUntil=" + paidUntil + ", createDate=" + createDate + ", logonCount=" + logonCount + ", logonMinutes=" + logonMinutes + ", multiCharacterTraining=" + multiCharacterTraining + '}';
     }
+
+
+
     
 }

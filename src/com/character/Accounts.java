@@ -12,30 +12,64 @@ import java.util.ArrayList;
  * @author designstation1
  */
 public class Accounts {
-    private int keyID;
-    private String vCode;
     private ArrayList<EVECharacter> characterList;
+    private APIKey apiKey;
+    private AccountStatus accStatus;
     
     public Accounts(int keyID, String vCode){
-        this.keyID = keyID;
-        this.vCode = vCode;
+        characterList = new ArrayList();
+        apiKey = new APIKey(keyID,vCode);
+        
+    }
+    public Accounts(){
+       characterList = new ArrayList(); 
+    }
+    
+    public void addCharacter(String name, int characterID, int corporationID, String corporationName){
+        EVECharacter tempChar = new EVECharacter();
+        tempChar.setName(name);
+        tempChar.setCharacterID(characterID);
+        tempChar.setCorporationID(corporationID);
+        tempChar.setCorporationName(corporationName);
+        characterList.add(tempChar);
+    }
+    
+    public void addCharacter(EVECharacter tempChar){
+        characterList.add(tempChar);
+    }
+    
+    public void updateCharacter(EVECharacter oldChar){
+        
+    }
+    
+    public EVECharacter getCharacter(int characterID){
+        EVECharacter tempChar = null;
+        for (int x = 0; x < characterList.size(); x++){
+            if(characterList.get(x).getCharacterID() == characterID) tempChar = characterList.get(x);
+            }
+        return tempChar;
     }
 
-    public int getKeyID() {
-        return keyID;
+    public APIKey getApiKey() {
+        return apiKey;
     }
 
-    public void setKeyID(int keyID) {
-        this.keyID = keyID;
+    public void setApiKey(APIKey apiKey) {
+        this.apiKey = apiKey;
+    }
+    
+    public void printAccount(){
+        for (int x = 0; x < characterList.size() ; x++) {
+            System.out.println(characterList.get(x));
+        }
     }
 
-    public String getvCode() {
-        return vCode;
+    @Override
+    public String toString() {
+        return "Accounts{" + "characterList=" + characterList + ", apiKey=" + apiKey + ", accStatus=" + accStatus + '}';
     }
 
-    public void setvCode(String vCode) {
-        this.vCode = vCode;
-    }
+
     
     
 }

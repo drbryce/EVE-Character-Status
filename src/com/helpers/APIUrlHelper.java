@@ -12,10 +12,11 @@ import com.character.APIKey;
  * @author designstation1
  */
 public class APIUrlHelper {
-    private String tempString = "https://api.eveonline.com/";
+    private String tempString;
     
     public String getUrlString(APIType choice){ //no API info
-            
+        tempString = "https://api.eveonline.com/";
+        
         switch(choice){
             case API_CALL_LIST:
                 tempString = tempString + "api/CallList.xml.aspx";
@@ -81,7 +82,7 @@ public class APIUrlHelper {
     }
     
     public String getUrlString(APIType choice, String argument){ //no API info
-            
+        tempString = "https://api.eveonline.com/";    
         switch(choice){
             case EVE_CHARACTER_ID:
                 tempString = tempString + "eve/CharacterID.xml.aspx?" + "names=" + argument;
@@ -103,7 +104,7 @@ public class APIUrlHelper {
     }
     
     public String getUrlString(APIKey apiKey, int characterID, APIType choice){ //with characterID
-       
+        tempString = "https://api.eveonline.com/";
         switch(choice){
             case CHAR_ACCOUNT_BALANCE:
                 tempString = tempString + "char/AccountBalance.xml.aspx?" + "keyID=" + apiKey.getKeyID() + "&characterID=" + characterID + "&vCode=" + apiKey.getvCode();
@@ -281,7 +282,7 @@ public class APIUrlHelper {
     }
  
     public String getUrlString(APIKey apiKey, APIType choice){ //without characterID
-        
+        tempString = "https://api.eveonline.com/";    
         switch(choice){
             case ACC_ACCOUNT_STATUS:
                 tempString = tempString + "account/AccountStatus.xml.aspx?" + "keyID=" + apiKey.getKeyID() + "&vCode=" + apiKey.getvCode();
@@ -311,7 +312,7 @@ public class APIUrlHelper {
     }
 
     public String getUrlString(APIKey apiKey, int characterID, int thirdID, APIType choice){ //with characterID & eventID
-        
+        tempString = "https://api.eveonline.com/";        
         switch(choice){
             case CHAR_CALENDAR_EVENT_ATTENDEES:
                 tempString = tempString + "char/CharacterSheet.xml.aspx?" + "keyID=" + apiKey.getKeyID() + "&characterID=" + characterID + "&eventID=" + thirdID + "&vCode=" + apiKey.getvCode();
@@ -377,7 +378,7 @@ public class APIUrlHelper {
     }
     
     public String getUrlString(APIKey apiKey, int characterID, String thirdID, APIType choice){ //with characterID & thirdID string
-        
+        tempString = "https://api.eveonline.com/";        
         switch(choice){
                 
             case CHAR_LOCATIONS:
@@ -404,7 +405,7 @@ public class APIUrlHelper {
     }  
     
     public String getUrlString(APIKey apiKey, int characterID, int thirdID, int fourthID, int fifthID, APIType choice){ //with characterID & eventID
-        
+        tempString = "https://api.eveonline.com/";       
         switch(choice){
             case CORP_WALLET_JOURNAL:
                 tempString = tempString + "corp/WalletJournal.xml.aspx?" + "keyID=" + apiKey.getKeyID() + "&characterID=" + characterID + "&accountKey=" + thirdID + "&fromID=" + fourthID + "&rowCount=" + fifthID + "&vCode=" + apiKey.getvCode();

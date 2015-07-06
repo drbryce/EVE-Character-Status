@@ -48,6 +48,8 @@ public class EVECharacter {
         skillList = new ArrayList();
     }
     
+    //public EVECharacter()
+    
     public void addJumpClones(JumpClone jumpClone){
         jumpClones.add(jumpClone);
     }

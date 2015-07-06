@@ -1,8 +1,6 @@
 
 import com.character.APIKey;
-import com.character.Accounts;
-import static com.helpers.APIType.*;
-import com.helpers.APIUrlHelper;
+import com.character.AccountController;
 import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
@@ -23,11 +21,22 @@ public class EVECharStatus {
                 int keyID = 2200844;
                 String vCode = "2mNOIhFfJe10IU5oaEetpnRAE0OXR8wxmWyjPti9CLAXL3iIzDSKUxbZlfIIOgFz";
 		
+                AccountController accController = new AccountController();
+                accController.addAccount(keyID,vCode);
+                
+                APIKey testKey = new APIKey(keyID,vCode);
+                System.out.println(accController.getAccount(testKey));
+                
+
+                //accController.printAccounts();
+
+                /*
                 Accounts eveAccount = new Accounts(keyID,vCode);
                 APIKey apiKey = new APIKey(keyID,vCode);
                 APIUrlHelper urlHelper = new APIUrlHelper();
                 String url = urlHelper.getUrlString(apiKey,1,CHAR_FACTIONAL_WARFARE_STATS);
                 System.out.println(url);
+                */
                 
                 /*
                 APIKey apiKey = new APIKey(keyID,vCode);
